@@ -42,8 +42,8 @@ class Participant {
     this.status = status;
   }
 
-  void setAvailableTime () {
-
+  void setAvailableTime (var available) {
+    this.available = available;
   }        
 
   void getMentor () {
@@ -76,7 +76,7 @@ main () {
             participant.stack = int.parse(stdin.readLineSync()) - 1;
 
             print("Enter the time when you are available (HH:MM AM/PM) :-");
-            participant.available = stdin.readLineSync();
+            participant.setAvailableTime(stdin.readLineSync());
 
             participant.getMentor();
 
@@ -95,7 +95,7 @@ main () {
             participant.stack = int.parse(stdin.readLineSync()) - 1;
 
             print("Enter the time when you are available (HH:MM AM/PM) :-");
-            participant.available = stdin.readLineSync();
+            participant.setAvailableTime(stdin.readLineSync());
 
             participant.getMentor();
 
