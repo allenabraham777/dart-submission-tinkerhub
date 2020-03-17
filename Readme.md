@@ -16,8 +16,3 @@ getMentor() : Takes stack and time as params and finds available mentors.
 # Keep in mind
 
 After running the program at first add the mentors, then only add the participants.
-
-The program is made with few assumption
-
-1. At a purticular time there will be only one mentor for each track.
-2. Learners know the time at which thier mentors are available.
