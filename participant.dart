@@ -4,15 +4,12 @@ List stacks = ['Flutter','Python','Go','Web','UI/UX'];
 List <Participant>participants = [];
 List <int>mentors = [];
 
-bool findmentor (var i, var stack, var available) {
-  if(participants[i].stack == stack && participants[i].available == available)
-    return true;
-  return false;
-}
-
 void display (var i)
 {
-  print(participants[i].id.toString() + "  " + participants[i].name + " " + stacks[participants[i].stack] + " " + participants[i].available);
+  if(participants[i].mentorId == -1)
+    print(participants[i].id.toString() + "  " + participants[i].name + " " + stacks[participants[i].stack] + " " + participants[i].available);
+  else
+    print(participants[i].id.toString() + "  " + participants[i].name + " " + stacks[participants[i].stack] + " " + participants[participants[i].mentorId].name);
   // print(participants[i].id.toString() + ": " + participants[i].name + " " + participants[i].status+ " " + stacks[participants[i].stack] + " " + participants[i].available + " " + participants[participants[i].mentorId].name);
 }
 
@@ -50,9 +47,11 @@ class Participant {
     if (this.status == 'learner') {
       int i = 0;
       for (i in mentors) {
-        if(findmentor(i,this.stack,this.available))
+        if(participants[i].stack == this.stack)
+        {
           this.mentorId = i;
           break;
+        }
       }
     }
     else
@@ -74,9 +73,6 @@ main () {
 
             print("Choose Your Stack:\n\n1.Flutter \n2.Python \n3.Go \n4.Web \n5.UI/UX\n\n>>");
             participant.stack = int.parse(stdin.readLineSync()) - 1;
-
-            print("Enter the time when you are available (HH:MM AM/PM) :-");
-            participant.setAvailableTime(stdin.readLineSync());
 
             participant.getMentor();
 
@@ -108,7 +104,7 @@ main () {
             mentors.forEach(display);
             break;
      case 4:print("Printed as follows");
-            print("ID   NAME   STACK   AVAILABLE TIME");
+            print("ID   NAME   STACK   Mentor");
             for(int j = 0; j < participants.length; j++)
               if (participants[j].mentorId != -1)
                 display(j);
